@@ -1,0 +1,45 @@
+body {
+  background: #efefef;
+}
+
+nav {
+  display: block;
+  margin-bottom:20px;
+  ul {
+    padding: 5px;
+    margin: 0;
+    border-bottom:1px solid #ccc;
+  }
+  li {
+    list-style: None;
+    display: inline-block;
+    margin-right:10px;
+
+    a{
+      font:normal 12px Georgia,Arial;
+      text-decoration:none;
+      color:#444;
+
+    }
+  }
+}
+
+main{
+  font-size:50vw;
+  text-align: center;
+  color:#8c118c;
+  padding-top: 40vh;
+  width:80vw;
+}
+
+
+  span{ display: inline-block;
+    font-size:10vw;
+  &.previous{
+    float:left;
+    padding-top: 40vh;}
+    &.next {
+      float:right;
+      padding-top: 40vh;
+    }
+  }
