@@ -45,7 +45,11 @@ module.exports = env => {
 
             status: "miminal",
 
-            historyApiFallback: true
+            historyApiFallback: true,
+
+            port:8888,
+
+            host:"0.0.0.0"
         },
 
         module: {
