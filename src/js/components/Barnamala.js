@@ -47,6 +47,21 @@ class Barnamala extends React.Component {
             </div>
         </div>
     }
+
+
+    resizeBarnamala(){
+        let node = document.querySelector(".barnamala span.selected");
+        for (var i = 0; (node = node.previousSibling); i++);
+        document.querySelector(".barnamala").style.left = "-" + window.innerWidth * 0.2 * (i - 1) + "px";
+
+    }
+
+    componentDidMount(){
+        window.addEventListener("resize",()=>{
+            clearTimeout(this._resizeTimer);
+            this._resizeTimer = setTimeout(this.resizeBarnamala, 16);
+        })
+    }
 }
 
 export default Barnamala

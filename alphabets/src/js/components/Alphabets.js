@@ -72,20 +72,6 @@ class Alphabets extends React.Component {
             </div>
         </div>
     }
-
-    resizeAlphabets(){
-        let node = document.querySelector(".alphabets span.selected");
-        for (var i = 0; (node = node.previousSibling); i++);
-        document.querySelector(".alphabets").style.left = "-" + window.innerWidth * 0.2 * (i - 1) + "px";
-
-    }
-
-    componentDidMount(){
-        window.addEventListener("resize",()=>{
-            clearTimeout(this._resizeTimer);
-            this._resizeTimer = setTimeout(this.resizeAlphabets, 16);
-        })
-    }
 }
 
 export default Alphabets
