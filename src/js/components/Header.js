@@ -1,11 +1,8 @@
-import React, { Fragment, Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class HeaderComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { languages } = this.props;
     return (
@@ -15,7 +12,9 @@ class HeaderComponent extends Component {
           Select Language:
           <select
             ame="language"
-            ref={input => (this.language = input)}
+            ref={input => {
+              this.language = input;
+            }}
             onChange={() => this.props.selectLanguage(this.language.value)}
           >
             {Object.keys(languages).map(key => (
@@ -30,12 +29,17 @@ class HeaderComponent extends Component {
   }
 }
 
+HeaderComponent.propTypes = {
+  selectLanguage: PropTypes.func.isRequired,
+  languages: PropTypes.object.isRequired // eslint-disable-line
+};
+
 const mapStateToProps = state => ({
   languages: state.languages
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectLanguage: lang => dispatch({ type: "SWITCH_LANGUAGE", lang })
+  selectLanguage: lang => dispatch({ type: 'SWITCH_LANGUAGE', lang })
 });
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
