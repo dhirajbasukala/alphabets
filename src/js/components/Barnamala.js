@@ -4,64 +4,96 @@
 
 import React from 'react';
 import Header from './Header';
+import { connect } from 'react-redux';
 
+class BarnamalaComponent extends React.Component {
 
-class Barnamala extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            mainAlphabet: "क",
-        }
-        this.makeSelection = this.makeSelection.bind(this);
-
-        this.barnamala = "क ख ग घ ङ च छ ज झ ञा ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह क्ष त्र ज्ञ".split(" ");
-
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(prevState.selectedLanguage !== nextProps.selectedLanguage){
+      return {
+        barnamala: nextProps.languages[nextProps.selectedLanguage].letters,
+        selectedIndex:0
+      };
     }
+    return null;
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedIndex: 0,
+      direction: '',
+      barnamala: this.props.languages[this.props.selectedLanguage].letters
+    };
+    this.makeSelection = this.makeSelection.bind(this);
+  }
+  
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      clearTimeout(this._resizeTimer);
+      this._resizeTimer = setTimeout(this.resizeBarnamala, 16);
+    });
+  }
+  makeSelection(selectedIndex) {
+    if (selectedIndex === this.state.selectedIndex) return;
+    const direction =
+      selectedIndex > this.state.selectedIndex ? 'left' : 'right';
+    console.log(direction);
+    this.setState({
+      selectedIndex,
+      direction
+    });
+  }
 
-
-
-    makeSelection(e) {
-        console.log("makeSelection");
-        console.log(e);
-        if (!e.target.classList.contains("selected")) {
-            document.querySelector("span.selected").classList.remove("selected");
-            e.target.classList.toggle("selected");
-            for (var i = 0; (e.target = e.target.previousSibling); i++);
-            document.querySelector(".barnamala").style.left = "-" + window.innerWidth * 0.2 * (i - 1) + "px";
-
-        }
+  render() {
+    //return <div> hwllo </div>
+    const { barnamala, selectedIndex } = this.state;
+    let left = selectedIndex - 1;
+    let center = selectedIndex;
+    let right = selectedIndex + 1;
+    if (selectedIndex === 0) {
+      left = 0;
+      center = 1;
+      right = 2;
     }
-
-    render() {
-        return <div className="wrapper">
-            <Header/>
-            <div className="barnamalasWrapper">
-                <div className="barnamala">
-                    {
-                        this.barnamala.map(f=>
-                            <span key={f} onClick={this.makeSelection.bind(this)}
-                                  className={this.state.mainAlphabet === f ? "selected" : ''}>{f}</span>
-                        )
-                    }
-                </div>
-            </div>
+    if (selectedIndex === barnamala.length) {
+      left = selectedIndex - 2;
+      center = selectedIndex - 1;
+      right = selectedIndex;
+    }
+    const transform = `translateX(-${(this.state.selectedIndex - 1) * 15}vw`;
+    return (
+      <div className="wrapper">
+        <Header />
+        <div className="barnamalasWrapper">
+          <div
+            className="barnamala"
+            style={{
+              transform
+            }}
+          >
+            {this.state.barnamala.map((letter, index) => (
+              <button
+                key={letter}
+                onClick={() => this.makeSelection(index)}
+                className={selectedIndex === index ? 'selected' : ''}
+              >
+                {letter}
+              </button>
+            ))}
+            
+          </div>
         </div>
-    }
-
-
-    resizeBarnamala(){
-        let node = document.querySelector(".barnamala span.selected");
-        for (var i = 0; (node = node.previousSibling); i++);
-        document.querySelector(".barnamala").style.left = "-" + window.innerWidth * 0.2 * (i - 1) + "px";
-
-    }
-
-    componentDidMount(){
-        window.addEventListener("resize",()=>{
-            clearTimeout(this._resizeTimer);
-            this._resizeTimer = setTimeout(this.resizeBarnamala, 16);
-        })
-    }
+      </div>
+    );
+  }
 }
 
-export default Barnamala
+
+const mapStateToProps = (state) => ({
+  languages: state.languages,
+  selectedLanguage: state.selectedLanguage
+})
+
+const Barnamala = connect(mapStateToProps)(BarnamalaComponent)
+
+export default Barnamala;

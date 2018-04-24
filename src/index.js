@@ -1,22 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AppRoutes from './js/components/AppRoutes'
-import {AppContainer} from 'react-hot-loader';
-import './styles/App.scss'
-
-const render = () => {
-    ReactDOM.render(
-        <AppContainer>
-                <AppRoutes/>
-        </AppContainer>,
-        document.getElementById('root')
-    );
+import React from "react";
+import ReactDOM from "react-dom";
+import { AppContainer } from "react-hot-loader";
+import AppRoutes from "./js/components/AppRoutes";
+import "./styles/App.scss";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./js/components/reducer";
+const store = createStore(rootReducer);
+const render = Root => {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    </AppContainer>,
+    document.getElementById("root")
+  );
 };
 
-render();
-
+render(AppRoutes);
 
 // Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./js/components/AppRoutes', render);
+  module.hot.accept("./js/components/AppRoutes", () => {
+    const HotApp = require("./js/components/AppRoutes").default;
+    render(HotApp);
+  });
 }

@@ -1,5 +1,11 @@
-node_modules/
+.ctrlp
 .idea/
+node_modules/
 npm-debug.log
-yarn-error.log
+log/
+test/tmp/
+src/client/dist/
+.vs/
+tags
 .DS_Store
+.history

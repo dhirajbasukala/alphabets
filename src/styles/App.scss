@@ -1,148 +1,111 @@
-body {
-  background: #efefef;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-nav {
-  display: block;
-  margin-bottom: 20px;
-  ul {
-    padding: 5px;
+body {
+    background: #efefef;
     margin: 0;
-    border-bottom: 1px solid #ccc;
-  }
-  li {
-    list-style: None;
-    display: inline-block;
-    margin-right: 10px;
-
-    a {
-      font: normal 12px Georgia, Arial;
-      text-decoration: none;
-      color: #444;
-
-    }
-  }
+    padding: 0;
 }
 
 .wrapper {
-  position: relative;
+    position: relative;
 }
 
 main {
-  font-size: 50vw;
-  text-align: center;
-  color: #8c118c;
-  width: 80vw;
-  display: inline-block;
-  /*transition: all 1s ease-in;*/
-  /*border: 1px solid red;*/
-  display: inline-block;
+    font-size: 50vw;
+    text-align: center;
+    color: #8c118c;
+    width: 80vw;
+    display: inline-block;
+    display: inline-block;
 }
 
-@keyframes expand {
-  0%{
-    font-size:10vw
-  }
-  100% {
-
-    font-size:80vw;
-  }
-
+.container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
 }
 
-
-@keyframes shrink {
-  0%{
-    font-size:80vw
-  }
-  100% {
-
-    font-size:10vw;
-  }
-
+.wrapper {
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 50px;
+        z-index: 1;
+        width: 100vw;
+        background: #e6e6e6;
+        animation: 0.4s ease-out 0s 1 ContentslideInFromUp;
+        h1 {
+            float: left;
+            margin: 5px 20px;
+        }
+        nav {
+            float: right;
+            padding: 10px;
+            label {
+                font-family: georgia;
+                font-size: 16px;
+                color: #666;
+            }
+            select {
+                border: 1px solid #ccc;
+                color: #555;
+                padding: 5px 10px;
+                border-radius: 0;
+                height: 30px;
+                width: 100px;
+                margin: 0 0 0 10px;
+                font-size: 14px;
+            }
+        }
+    }
+    .barnamalasWrapper {
+        animation: 0.2s ease-out 0s 1 ContentslideInFromUp;
+        height: 100vh;
+        background: green;
+        overflow: hidden;
+        .barnamala {
+            display: flex;
+            flex: 1;
+            transition: all 0.5s ease-in-out;
+            height: 100vh;
+            button {
+                width: 15vw;
+                font-size: 15vw;
+                display: flex;
+                align-items: center;
+                transition: all 0.5s ease-in-out;
+                cursor: pointer;
+                padding: 0 5vw;
+                height: 95vh;
+                text-align: center;
+                justify-content: center;
+                height: 100%;
+                outline: 0;
+                border: 0;
+            }
+            button.selected {
+                font-size: 50vh;
+                padding: 10vh;
+                color: #ff00a5;
+                padding: 0 35vw;
+            }
+        }
+    }
 }
 
-.alphabetsWrapper {
-  width:99vw;
-  max-width:100vw;
-  overflow:hidden;
-  position:absolute;
-  height:90vh;
-
-  .alphabets {
-    display: flex;
-    flex: 1 0 0;
-    width: 560vw;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    transition: all 0.5s ease-in-out;
-    position:absolute;
-    left:0;
-
-
-    span {
-      width: 10vw;
-      font-size: 15vw;
-      display: flex;
-      align-items: center;
-      transition: all 0.5s ease-in-out;
-      cursor: pointer;
-      padding: 0 5vw;
-      min-width:10vw;
-      height: 95vh;
-
+@keyframes ContentslideInFromUp {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0.5
     }
-
-    span.selected {
-      width: 50vw;
-      font-size: 65vw;
-      text-align: center;
-      min-width:50vw;
-      justify-content: center;
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-}
-
-
-.barnamalasWrapper {
-  width:99vw;
-  max-width:100vw;
-  overflow:hidden;
-  position:absolute;
-  height:90vh;
-
-  .barnamala {
-    display: flex;
-    flex: 1 0 0;
-    width: 760vw;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    transition: all 0.5s ease-in-out;
-    position:absolute;
-    left:0;
-
-    span {
-      width: 10vw;
-      font-size: 15vw;
-      display: flex;
-      align-items: center;
-      transition: all 0.5s ease-in-out;
-      cursor: pointer;
-      padding: 0 5vw;
-      min-width:10vw;
-      height: 95vh;
-
-    }
-
-    span.selected {
-      width: 50vw;
-      font-size: 65vw;
-      text-align: center;
-      min-width:50vw;
-      justify-content: center;
-      color:green;
-      transition: all 0.5s ease-in-out;
-
-    }
-  }
 }

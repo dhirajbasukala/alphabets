@@ -1,18 +1,26 @@
-import React from 'react';
-import {Router, Route, browserHistory} from 'react-router';
+import React, { Component } from "react";
+import { BrowserRouter, Route, withRouter } from "react-router-dom";
+import Barnamala from "./Barnamala";
 
-import About from './About';
-import Alphabets from './Alphabets'; //todo
-import Barnamala from './Barnamala'; //todo
-
-
-export default ()=> {
+class Letters extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
+    };
+    this.gotoBarnamala= this.gotoBarnamala.bind(this);
+  }
+  gotoBarnamala(){
+    return <Barnamala letters={this.state.letters} />;
+  }
+  render() {
     return (
-        <Router history={browserHistory}>
-            <Route path="/" components={Alphabets}/>
-            <Route path="/barnamala" components={Barnamala}/>
-            <Route path="/about" components={About}/>
-        </Router>
-    )
-
+      <BrowserRouter>
+        <div>
+            <Route exact path="/" render={this.gotoBarnamala} />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
+export default Letters;

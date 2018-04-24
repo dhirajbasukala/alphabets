@@ -34,7 +34,7 @@ module.exports = env => {
             publicPath: '/',
             //match the output publicPath
 
-            status: "miminum"
+            status: "errors-only"
         },
 
         module: {
@@ -45,8 +45,7 @@ module.exports = env => {
                     options:{
                         "babelrc": false,
                         "presets": [
-                            ["es2015", {"modules": false}],
-                            "stage-2",
+                            "env",
                             "react"
                         ],
                     }
