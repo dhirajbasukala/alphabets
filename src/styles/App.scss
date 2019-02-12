@@ -1,111 +1,133 @@
+@import './font.scss';
+
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background: #efefef;
-    margin: 0;
-    padding: 0;
+  background: #efefef;
+  margin: 0;
+  padding: 0;
+  font-family: 'opensans-light';
+  font-size: 14px;
 }
 
 .wrapper {
-    position: relative;
+  position: relative;
 }
 
 main {
-    font-size: 50vw;
-    text-align: center;
-    color: #8c118c;
-    width: 80vw;
-    display: inline-block;
-    display: inline-block;
+  font-size: 50vw;
+  text-align: center;
+  color: #8c118c;
+  width: 80vw;
+  display: inline-block;
+  display: inline-block;
 }
 
 .container {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    perspective: 1000px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
 }
 
 .wrapper {
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 50px;
-        z-index: 1;
-        width: 100vw;
-        background: #e6e6e6;
-        animation: 0.4s ease-out 0s 1 ContentslideInFromUp;
-        h1 {
-            float: left;
-            margin: 5px 20px;
-        }
-        nav {
-            float: right;
-            padding: 10px;
-            label {
-                font-family: georgia;
-                font-size: 16px;
-                color: #666;
-            }
-            select {
-                border: 1px solid #ccc;
-                color: #555;
-                padding: 5px 10px;
-                border-radius: 0;
-                height: 30px;
-                width: 100px;
-                margin: 0 0 0 10px;
-                font-size: 14px;
-            }
-        }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    background: #e6e6e6;
+    animation: 0.4s ease-out 0s 1 ContentslideInFromUp;
+
+    h1 {
+      float: left;
+      margin: 8px 0px 0 21px;
     }
-    .barnamalasWrapper {
-        animation: 0.2s ease-out 0s 1 ContentslideInFromUp;
-        height: 100vh;
-        background: green;
-        overflow: hidden;
-        .barnamala {
-            display: flex;
-            flex: 1;
-            transition: all 0.5s ease-in-out;
-            height: 100vh;
-            button {
-                width: 15vw;
-                font-size: 15vw;
-                display: flex;
-                align-items: center;
-                transition: all 0.5s ease-in-out;
-                cursor: pointer;
-                padding: 0 5vw;
-                height: 95vh;
-                text-align: center;
-                justify-content: center;
-                height: 100%;
-                outline: 0;
-                border: 0;
-            }
-            button.selected {
-                font-size: 50vh;
-                padding: 10vh;
-                color: #ff00a5;
-                padding: 0 35vw;
-            }
-        }
+
+    nav {
+      width: 190px;
+      float: right;
+      padding: 10px;
+      max-width: calc(100% - 155px);
+
+      label {
+        font-family: georgia;
+        font-size: 16px;
+        color: #666;
+      }
+
+      select {
+        border: 1px solid #ccc;
+        color: #555;
+        padding: 5px 10px;
+        border-radius: 0;
+        height: 30px;
+        width: 100px;
+        margin: 0 10px 0 0;
+        font-size: 14px;
+        float: right;
+        border-radius: 20px;
+      }
     }
+  }
+
+  .barnamalasWrapper {
+    animation: 0.2s ease-out 0s 1 ContentslideInFromUp;
+    height: 100vh;
+    overflow: hidden;
+
+    .barnamala {
+      display: flex;
+      flex: 1;
+      will-change: transform;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100vh;
+
+      button {
+        width: 15vw;
+        font-size: 15vw;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+        cursor: pointer;
+        padding: 0 5vw;
+        height: 95vh;
+        text-align: center;
+        justify-content: center;
+        height: 100%;
+        outline: 0 none;
+        border: 0;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        background: transparent;
+        will-change: transform, color;
+        
+      }
+
+      button.selected {
+        font-size: 50vh;
+        padding: 10vh;
+        color: #006eff;
+        padding: 0 35vw;
+        pointer-events: none;
+      }
+    }
+  }
 }
 
 @keyframes ContentslideInFromUp {
-    0% {
-        transform: translateY(-50px);
-        opacity: 0.5
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(-50px);
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

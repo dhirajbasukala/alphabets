@@ -4,15 +4,6 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 
 class BarnamalaComponent extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.selectedLanguage !== nextProps.selectedLanguage) {
-      return {
-        barnamala: nextProps.languages[nextProps.selectedLanguage].letters,
-        selectedIndex: 0
-      };
-    }
-    return null;
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -21,20 +12,25 @@ class BarnamalaComponent extends React.Component {
     };
     this.makeSelection = this.makeSelection.bind(this);
   }
-
   componentDidMount() {
     window.addEventListener('resize', () => {
       clearTimeout(this._resizeTimer);
       this._resizeTimer = setTimeout(this.resizeBarnamala, 16);
     });
   }
-  makeSelection(selectedIndex) {
-    if (selectedIndex === this.state.selectedIndex) return;
-    const direction =
-      selectedIndex > this.state.selectedIndex ? 'left' : 'right';
-    console.log(direction);
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedLanguage !== this.props.selectedLanguage) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        barnamala: this.props.languages[this.props.selectedLanguage].letters
+      });
+    }
+  }
+
+  makeSelection(index) {
     this.setState({
-      selectedIndex
+      selectedIndex: index
     });
   }
 
@@ -56,6 +52,7 @@ class BarnamalaComponent extends React.Component {
                 key={letter}
                 onClick={() => this.makeSelection(index)}
                 className={selectedIndex === index ? 'selected' : ''}
+                data-index={index}
               >
                 {letter}
               </button>
