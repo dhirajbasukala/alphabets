@@ -1,11 +1,7 @@
 module.exports = {
-  "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
-  "plugins": [
-    "import",
-    "prettier",
-    "jest",
-  ],
-  "env": {
+  extends: ["airbnb", "prettier", "plugin:jest/recommended"],
+  plugins: ["import", "prettier", "jest"],
+  env: {
     node: true,
     browser: true,
     es6: true,
@@ -13,49 +9,52 @@ module.exports = {
   },
   rules: {
     strict: ["error", "global"],
-    "indent": [
+    indent: [
       "error",
       2,
       {
-        "SwitchCase": 1
-      }
+        SwitchCase: 1,
+      },
     ],
-    "linebreak-style": [
-      "off",
-      "unix"
-    ],
-    "quotes": [
+    "linebreak-style": ["off", "unix"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
+    "comma-dangle": 1,
+    "import/no-extraneous-dependencies": [
       "error",
-      "single"
+      {
+        devDependencies: true,
+      },
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "comma-dangle": 0,
-    "import/no-extraneous-dependencies": ["error", {
-      devDependencies: true
-    }],
     "no-console": 0,
-    "jsx-a11y/anchor-is-valid": ["warn", {
-      "components": ["Link"],
-      "specialLink": ["hrefLeft", "hrefRight", "to"],
-      "aspects": ["noHref", "invalidHref", "preferButton"]
-    }],
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        components: ["Link"],
+        specialLink: ["hrefLeft", "hrefRight", "to"],
+        aspects: ["noHref", "invalidHref", "preferButton"],
+      },
+    ],
     "global-require": 0,
     "no-underscore-dangle": 0,
-    "react/jsx-filename-extension": [1, {
-      "extensions": [".js", ".jsx"]
-    }],
-    "prettier/prettier": ["warn", {
-      "singleQuote": true
-    }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        extensions: [".js", ".jsx"],
+      },
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        singleQuote: false,
+      },
+    ],
   },
-  "parserOptions": {
+  parserOptions: {
     ecmaVersion: 6,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
 };
